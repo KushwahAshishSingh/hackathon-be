@@ -1,7 +1,9 @@
-const transactionRouter = require('./transaction');
+const express = require('express');
+const router = express.Router();
 
-function initRoutes(app) {
-  app.use('/transaction', transactionRouter);
-}
+const healthCheckRouter = require('./healthCheck');
 
-module.exports = initRoutes;
+router.use('/healthcheck',healthCheckRouter);
+
+
+module.exports = router;

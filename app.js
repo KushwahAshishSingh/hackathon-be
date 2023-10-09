@@ -20,8 +20,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 initDB();
-initRoutes(app);
+// initRoutes(app);
 
+const router = require('./routes/index')
+app.use('/api', router);
 
 
 app.use(function(req, res, next) {
@@ -31,7 +33,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.json({
+  res.status(err.status || 500).json({
     error: {
       message: err.message,
       error: err
