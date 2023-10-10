@@ -6,4 +6,13 @@ const createUser = async (uid, name, email, isAdmin) => {
     })
 }
 
-module.exports = { createUser }
+const searchWithFirebaseUserId = async (uid) => {
+    return usersModel.findOne({ uid })
+}
+
+const changePrivilege = async (userId, isAdmin) => {
+    return usersModel.findByIdAndUpdate(userId, {$set: {isAdmin: isAdmin}} )
+}
+
+
+module.exports = { createUser, searchWithFirebaseUserId, changePrivilege }
