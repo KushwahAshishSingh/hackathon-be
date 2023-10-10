@@ -6,8 +6,8 @@ const logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
 
-const initDB = require('./config/db');
-const initRoutes = require('./routes/index');
+const initDB = require('./config/db.config');
+// const initRoutes = require('./routes/index.router');
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 initDB();
 // initRoutes(app);
 
-const router = require('./routes/index')
+const router = require('./routes/index.router')
 app.use('/api', router);
 
 
