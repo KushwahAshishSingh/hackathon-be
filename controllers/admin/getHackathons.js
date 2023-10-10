@@ -1,24 +1,24 @@
 const Hackathon = require('../../models/admin/hackathon');
-const { httpStatus200, httpStatus500 } = require('../../utils/httpResponse');
+const { httpStatus200, httpStatus404 } = require('../../utils/httpResponse');
 const mongoose = require('mongoose');
 
 const listHackathonBySearch = async (req, res) => {
 
-    const { skip, limit, search, mockType, mockId } = req.query;
+    const { skip, limit, search, hackathonType, hackathonId } = req.query;
 
     const query = {};
 
     if (search) {
         query['title'] = { $regex: search, $options: 'i' };
     }
-    if (mockType) {
-        query['type'] = mockType;
+    if (hackathonType) {
+        query['hackathonType'] = hackathonType;
     }
-    if (mockId) {
-        query['_id'] = mongoose.Types.ObjectId(mockId);
+    if (hackathonId) {
+        query['_id'] = new mongoose.Types.ObjectId(hackathonId);
     }
 
-    const mockTest = await Hackathon.aggregate([
+    const fetchHackathon = await Hackathon.aggregate([
         {
             $match: query,
         },
@@ -39,15 +39,15 @@ const listHackathonBySearch = async (req, res) => {
         },
     ]);
 
-    if (!mockTest[0].metadata) {
-        return res.status(404).json(httpStatus404('MockTest not found', { metadata: [{ total: 0 }] }));
+    if (!fetchHackathon[0].metadata) {
+        return res.status(404).json(httpStatus404('Hackathon not found', { metadata: [{ total: 0 }] }));
     }
 
     return res
         .status(200)
         .json(
             httpStatus200(
-                mockTest
+                fetchHackathon
             )
         );
 };

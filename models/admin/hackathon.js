@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const typesEnums = {
     LIVE: "live",
-    PRACTICE: "practice"
+    PRACTICE: "practice",
+    ASSIGNMENT: "assignment",
+    PROJECT: "project",
+    TEST: "test",
 }
 const submissionsType = {
     TEAM: "team",
@@ -39,6 +42,12 @@ const hackathonSchema = new mongoose.Schema(
         },
         hackathonType: {
             type: String,
+            enum: [typesEnums.ASSIGNMENT, typesEnums.PROJECT, typesEnums.TEST],
+            required: true,
+            default: typesEnums.PRACTICE,
+        },
+        hackathonMode:{
+            type: String,
             enum: [typesEnums.LIVE, typesEnums.PRACTICE],
             required: true,
             default: typesEnums.PRACTICE,
@@ -60,18 +69,18 @@ const hackathonSchema = new mongoose.Schema(
             type: Date,
         },
         endDate: {
-            type: Date,
+            type: String,
         },
         resultDate: {
             type: Date,
         },
-        prices: {
+        prizes: {
             type: String,
         },
         details: {
             type: String,
         },
-        question: {
+        questions: {
             type: [question],
             required: false,
         }

@@ -20,7 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
  initDB();
 // initRoutes(app);
-
 const router = require('./routes/index.router')
 app.use('/api', router);
 

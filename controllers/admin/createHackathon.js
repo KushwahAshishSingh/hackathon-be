@@ -4,7 +4,7 @@ const { httpStatus200, httpStatus500, httpStatus409 } = require('../../utils/htt
 const createHackathon = async (req, res) => {
 
     const { hackathonId } = req.query;
-    const { title,hackathonType,submissionType,startDate,maxStartDate,endDate,resultDate,prices, questions, details } = req.body;
+    const { title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details } = req.body;
     const {question, questionType, instruction, outOf} = questions || {};
 
     if (hackathonId) {
@@ -35,7 +35,7 @@ const createHackathon = async (req, res) => {
     }
 
     const createHackathon = await Hackathon.create({
-        title,hackathonType,submissionType,startDate,maxStartDate,endDate,resultDate,prices, questions, details
+        title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details
     });
 
     if (!createHackathon) {

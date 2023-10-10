@@ -3,7 +3,7 @@ const { httpStatus200, httpStatus500, httpStatus409 } = require('../../utils/htt
 
 const updateHackathon = async (req, res) => {
     const { documentId, questionId } = req.query;
-    const { title,hackathonType,submissionType,startDate,maxStartDate,endDate,resultDate,prices, details,  question, questionType, instruction, outOf } = req.body;
+    const { title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, details,  question, questionType, instruction, outOf } = req.body;
 
     if (documentId && questionId) {
         const updateHackathon = await Hackathon.findOneAndUpdate(
@@ -35,12 +35,13 @@ const updateHackathon = async (req, res) => {
                 $set: {
                     title,
                     hackathonType,
+                    hackathonMode,
                     submissionType,
                     startDate,
                     maxStartDate,
                     endDate,
                     resultDate,
-                    prices,
+                    prizes,
                     details
                 },
             },
