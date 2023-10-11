@@ -3,7 +3,8 @@ const { httpStatus200, httpStatus500, httpStatus409 } = require('../../utils/htt
 
 const updateHackathon = async (req, res) => {
     const { documentId, questionId } = req.query;
-    const { title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, details,  question, questionType, instruction, outOf } = req.body;
+    const { title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details, instruction, companyDetails } = req.body;
+    const {name, companyType, place, image} = companyDetails || {};
 
     if (documentId && questionId) {
         const updateHackathon = await Hackathon.findOneAndUpdate(
@@ -12,7 +13,6 @@ const updateHackathon = async (req, res) => {
                 $set: {
                     'questions.$.question': question,
                     'questions.$.questionType': questionType,
-                    'questions.$.instruction': instruction,
                     'questions.$.outOf': outOf,
                 },
             },
@@ -42,7 +42,8 @@ const updateHackathon = async (req, res) => {
                     endDate,
                     resultDate,
                     prizes,
-                    details
+                    details,
+                    companyDetails
                 },
             },
             { new: true, omitUndefined: true }

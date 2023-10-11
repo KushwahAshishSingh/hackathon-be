@@ -25,9 +25,6 @@ const question = new mongoose.Schema({
         type: String,
         enum: Object.values[questionType.VIDEO, questionType.AUDIO, questionType.TEXT],
     },
-    instruction: {
-        type: String,
-    },
     outOf: {
         type: Number,
         default: 100
@@ -69,7 +66,7 @@ const hackathonSchema = new mongoose.Schema(
             type: Date,
         },
         endDate: {
-            type: String,
+            type: Date,
         },
         resultDate: {
             type: Date,
@@ -78,6 +75,23 @@ const hackathonSchema = new mongoose.Schema(
             type: String,
         },
         details: {
+            type: String,
+        },
+        companyDetails: {
+            name: {
+                type: String,
+            },
+            companyType: {
+                type: String,
+            },
+            place: {
+                type: String,
+            },
+            image: {
+                type: String,
+            }
+        },
+        instruction: {
             type: String,
         },
         questions: {
