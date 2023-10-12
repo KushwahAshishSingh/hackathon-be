@@ -11,10 +11,8 @@ const hasNoWhitespace = (value, { path }) => {
 
 
 const createTeamValidator = [
-  check("userId").exists().withMessage('userid is required').bail()
-    .isString().withMessage('Invalid userid').bail()
-    .isLength({ min: 1 }).withMessage("Invalid userid").bail()
-    .custom(hasNoWhitespace),
+  check("hackathonId").exists().withMessage('hackathonId is required').bail()
+    .isMongoId().withMessage('Invalid hackathonId'),
 
   check("name").exists().withMessage('name is required').bail()
     .isString().withMessage('Invalid name').bail()
