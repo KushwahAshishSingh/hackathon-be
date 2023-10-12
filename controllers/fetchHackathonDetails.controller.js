@@ -7,7 +7,6 @@ const listHackathonBySearch = async (req, res) => {
 
     const query = {};
     let projection = {};
-    const userId = new mongoose.Types.ObjectId("652527039203dfd69f89d47c")
 
     if (!hackathonId) {
         return res.status(404).json(httpStatus404("Id not found", hackathonId));
