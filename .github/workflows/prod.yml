@@ -32,8 +32,6 @@ jobs:
             --secret-id "hackathon-env" \
             --output text > .env
       - run: npm ci
-      - name: Build the app
-        run: npm run build
 
       - name: Restart PM2 Deployment
         run: pm2 reload ecosystem.config.js && pm2 save
