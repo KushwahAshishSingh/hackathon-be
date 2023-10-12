@@ -2,40 +2,21 @@ const Hackathon = require("../models/admin/hackathon");
 const { httpStatus200, httpStatus404 } = require("../utils/httpResponse");
 const mongoose = require("mongoose");
 
-const listHackathonBySearch = async (req, res) => {
+const fetchResults = async (req, res) => {
     const {filterInformation, hackathonId } = req.query;
 
     const query = {};
     let projection = {};
-    const userId = new mongoose.Types.ObjectId("652527039203dfd69f89d47c")
 
     if (!hackathonId) {
         return res.status(404).json(httpStatus404("Id not found", hackathonId));
     }
-
     query["_id"] = new mongoose.Types.ObjectId(hackathonId);
 
-    if (filterInformation === "About") {
+    if(filterInformation === "Result"){
         projection = {
-            About: "$details",
-        };
-    } else if (filterInformation === "Rules") {
-        projection = {
-            Rules: "$instruction",
-        };
-    } else if (filterInformation === "Prizes") {
-        projection = {
-            Prizes: "$prizes",
-        };
-    } else if (filterInformation === "Timelines") {
-        projection = {
-            Timelines: {
-                StartDate: "$startDate",
-                RegistrationEnds: "$maxStartDate",
-                EndDate: "$endDate",
-                ResultDate: "$resultDate",
-            },
-        };
+            Results: "$Results"
+        }
     }
 
     const fetchHackathon = await Hackathon.aggregate([
@@ -43,8 +24,26 @@ const listHackathonBySearch = async (req, res) => {
             $match: query,
         },
         {
+            $lookup: {
+                from: 'userhackathonsubmissions',
+                localField: '_id',
+                foreignField: 'hackathonId',
+                as: 'Results'
+            }
+        },
+        {
+            $unwind: '$Results'
+          },
+          {
+            $sort: {
+              'Results.updatedAt': -1,
+             // 'Results.timeTaken': 1 // Then sort by timeTaken in ascending order
+            }
+          },
+        {
             $project: projection,
         },
+       
     ]);
 
     if (!fetchHackathon) {
@@ -56,4 +55,6 @@ const listHackathonBySearch = async (req, res) => {
     return res.status(200).json(httpStatus200(fetchHackathon));
 };
 
-module.exports = listHackathonBySearch;
+module.exports = fetchResults;
+
+
