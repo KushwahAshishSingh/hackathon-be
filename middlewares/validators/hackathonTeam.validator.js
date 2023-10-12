@@ -52,5 +52,18 @@ const addUserTeamValidator = [
   ...validator
 ]
 
+const inviteUserTeamValidator = [
+  check("userId").exists().withMessage('userid is required').bail()
+    .isMongoId().withMessage('Invalid userid'),
 
-module.exports = { createTeamValidator, addUserTeamValidator }
+  check("teamId").exists().withMessage('teamId is required').bail()
+    .isMongoId().withMessage('Invalid teamId'),
+
+  check("hackathonId").exists().withMessage('hackathonId is required').bail()
+    .isMongoId().withMessage('Invalid hackathonId'),
+  
+  ...validator
+]
+
+
+module.exports = { createTeamValidator, addUserTeamValidator, inviteUserTeamValidator }

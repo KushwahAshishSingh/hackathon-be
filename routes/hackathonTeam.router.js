@@ -7,5 +7,6 @@ const hackathonTeam = require('../controllers/hackathonTeam.controller');
 
 router.post('/create-team', hackathonTeamValidator.createTeamValidator, hackathonTeam.createTeam);
 router.post('/add-user-in-team', hackathonTeamValidator.addUserTeamValidator, hackathonTeam.addUserInTeam)
+router.post('/invite-to-team', hackathonTeamValidator.inviteUserTeamValidator, hackathonTeam.inviteUserInTeam)
 
 module.exports = router;
