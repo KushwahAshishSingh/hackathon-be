@@ -5,7 +5,8 @@ const updateHackathon = async (req, res) => {
     const { documentId, questionId } = req.query;
     const { title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details, instruction, companyDetails } = req.body;
     const {name, companyType, place, image} = companyDetails || {};
-
+    const {question, questionType, outOf, roundDetails} = questions || {};
+console.log(roundDetails,'hell')
     if (documentId && questionId) {
         const updateHackathon = await Hackathon.findOneAndUpdate(
             { _id: documentId, 'questions._id': questionId },
@@ -14,6 +15,8 @@ const updateHackathon = async (req, res) => {
                     'questions.$.question': question,
                     'questions.$.questionType': questionType,
                     'questions.$.outOf': outOf,
+                    'questions.$.roundDetails': roundDetails,
+
                 },
             },
             { new: true, omitUndefined: true, runValidators: true }

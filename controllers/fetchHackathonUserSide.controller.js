@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 
 const listHackathonBySearch = async (req, res) => {
 
-    const { skip, limit, search, hackathonMode, hackathonId } = req.query;
+    let { skip, limit, search, hackathonMode, hackathonId } = req.query;
+    skip = parseInt(skip)
+    limit = parseInt(limit)
 
     const query = {};
     const currentDate = new Date()
@@ -28,7 +30,6 @@ const listHackathonBySearch = async (req, res) => {
         ];
     }
     if (hackathonMode === 'upcoming') {
-        console.log(hackathonMode,'upcoming')
         query['$and'] = [
             {
                 startDate: {
@@ -43,7 +44,6 @@ const listHackathonBySearch = async (req, res) => {
         ];
     }
     if (hackathonMode === 'previous') {
-        console.log(hackathonMode,'previous')
         query['$and'] = [
             {
                 startDate: {
