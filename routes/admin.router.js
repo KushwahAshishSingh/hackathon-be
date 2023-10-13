@@ -14,7 +14,6 @@ router.post('/', createHackathon);
 router.patch('/', updateHackathon);
 router.delete('/', deleteHackathon);
 router.get('/', fetchHackathon);
-
 router.post('/evaluate-hackathon', security.verifyUser, security.isAdminCheck, evaluateHackathon)
 router.post('/', security.verifyUser, security.isAdminCheck, hackathonValidator.createTeamValidator, security.verifyUser, security.isAdminCheck, createHackathon);
 router.patch('/', security.verifyUser, security.isAdminCheck, updateHackathon);
