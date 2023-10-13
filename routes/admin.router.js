@@ -14,7 +14,7 @@ router.patch('/', updateHackathon);
 router.delete('/', deleteHackathon);
 router.get('/', fetchHackathon);
 
-outer.post('/', security.verifyUser, security.isAdminCheck, hackathonValidator.createTeamValidator, security.verifyUser, security.isAdminCheck, createHackathon);
+router.post('/', security.verifyUser, security.isAdminCheck, hackathonValidator.createTeamValidator, security.verifyUser, security.isAdminCheck, createHackathon);
 router.patch('/', security.verifyUser, security.isAdminCheck, updateHackathon);
 router.delete('/', security.verifyUser, security.isAdminCheck, deleteHackathon);
 router.get('/fetch-teams', security.verifyUser, security.isAdminCheck, listHackathonTeams)
