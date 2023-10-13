@@ -12,7 +12,9 @@ const signup = async (req, res, next) => {
             token: firebaseUser._tokenResponse.idToken,
             refreshToken: firebaseUser._tokenResponse.refreshToken,
             expiresIn: firebaseUser._tokenResponse.expiresIn,
-            isAdmin: false
+            isAdmin: false,
+            email: localUser.email,
+            name: localUser.name
         })
     } catch (error) {
         console.log(error);
@@ -41,7 +43,9 @@ const signIn = async (req, res, next) => {
             token: firebaseUser._tokenResponse.idToken,
             refreshToken: firebaseUser._tokenResponse.refreshToken,
             expiresIn: firebaseUser._tokenResponse.expiresIn,
-            isAdmin: localUser.isAdmin
+            isAdmin: localUser.isAdmin,
+            email: localUser.email,
+            name: localUser.name
         })
     } catch (error) {
         console.log(error);
