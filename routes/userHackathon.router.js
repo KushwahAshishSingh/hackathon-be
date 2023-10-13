@@ -3,6 +3,6 @@ const router = express.Router();
 const userHackathonController = require('../controllers/userHackathon.controller')
 const userHackathonValidator = require('../middlewares/validators/userHackathon.validator')
 
-router.post('/submit', userHackathonValidator.submitHackathon, userHackathonController.submitHackathon);
+router.post('/submit', security.verifyUser, userHackathonValidator.submitHackathon, userHackathonController.submitHackathon);
 
 module.exports = router;
