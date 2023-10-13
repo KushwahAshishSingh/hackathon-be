@@ -11,6 +11,20 @@ const answerSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    points: {
+      type: String,
+    },
+    status: {
+      type: String,
+      default: 'fail',
+    },
+    submittedAt: {
+      type: Date
+    },
+    questionStatus:{
+      type: ['submitted','evaluated'],
+      default: 'evaluated'
+    }
   }
 );
 

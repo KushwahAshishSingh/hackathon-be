@@ -4,12 +4,14 @@ const createHackathon = require('../controllers/admin/createHackathon')
 const updateHackathon = require('../controllers/admin/updateHackathon')
 const deleteHackathon = require('../controllers/admin/deleteHackathon')
 const fetchHackathon = require('../controllers/admin/getHackathons')
+const listHackathonTeams = require('../controllers/admin/fetchTeamsSubmission')
 const authValidators = require('../middlewares/validators/auth.validator')
 const security = require('../middlewares/security/auth.security')
 
 router.post('/', createHackathon);
 router.patch('/', updateHackathon);
 router.delete('/', deleteHackathon);
+router.get('/fetch-teams', listHackathonTeams)
 router.get('/', fetchHackathon);
 
 
