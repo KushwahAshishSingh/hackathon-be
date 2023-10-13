@@ -16,7 +16,7 @@ router.post('/', security.verifyUser, security.isAdminCheck, hackathonValidator.
 router.patch('/', security.verifyUser, security.isAdminCheck, updateHackathon);
 router.delete('/', security.verifyUser, security.isAdminCheck, deleteHackathon);
 router.get('/fetch-teams', security.verifyUser, security.isAdminCheck, listHackathonTeams)
-router.get('/', security.verifyUser, security.isAdminCheck, fetchHackathon);
+router.get('/',  fetchHackathon);
 
 
 module.exports = router;
