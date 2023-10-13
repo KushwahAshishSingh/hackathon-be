@@ -5,7 +5,7 @@ const createHackathon = async (req, res) => {
 
     const { hackathonId } = req.query;
     const { title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details, instruction, companyDetails } = req.body;
-    const {question, questionType, outOf} = questions || {};
+    const {question, questionType, outOf, roundDetails} = questions || {};
     const {name, companyType, place, image} = companyDetails || {};
  
     if (hackathonId) {
@@ -14,7 +14,8 @@ const createHackathon = async (req, res) => {
             { $push: { questions: {
                 question,
                 questionType,
-                outOf
+                outOf,
+                roundDetails
             } } },
             { new: true }
         );
