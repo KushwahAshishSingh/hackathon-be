@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 
 const listHackathonBySearch = async (req, res) => {
 
-    const { skip, limit, search, hackathonMode, hackathonId } = req.query;
+    let { skip, limit, search, hackathonMode, hackathonId } = req.query;
+    skip = parseInt(skip)
+    limit = parseInt(limit)
 
     const query = {};
     const currentDate = new Date()

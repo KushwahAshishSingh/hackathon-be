@@ -36,7 +36,7 @@ const createHackathon = async (req, res) => {
     }
 
     const createHackathon = await Hackathon.create({
-        title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details, companyDetails, instruction
+        title, hackathonType, hackathonMode, submissionType, startDate, maxStartDate, endDate, resultDate, prizes, questions, details, companyDetails, instruction
     });
 
     if (!createHackathon) {
