@@ -4,18 +4,22 @@ const { httpStatus200, httpStatus500, httpStatus409 } = require('../../utils/htt
 const createHackathon = async (req, res) => {
 
     const { hackathonId } = req.query;
-    const { title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details, instruction, companyDetails } = req.body;
-    const {question, questionType, outOf} = questions || {};
-    const {name, companyType, place, image} = companyDetails || {};
- 
+    const { title, hackathonType, hackathonMode, submissionType, startDate, maxStartDate, endDate, resultDate, prizes, questions, details, instruction, companyDetails } = req.body;
+    const { question, questionType, outOf } = questions || {};
+    const { name, companyType, place, image } = companyDetails || {};
+
     if (hackathonId) {
         const addQuestion = await Hackathon.findOneAndUpdate(
             { _id: hackathonId },
-            { $push: { questions: {
-                question,
-                questionType,
-                outOf
-            } } },
+            {
+                $push: {
+                    questions: {
+                        question,
+                        questionType,
+                        outOf
+                    }
+                }
+            },
             { new: true }
         );
         if (!addQuestion) {
@@ -35,7 +39,7 @@ const createHackathon = async (req, res) => {
     }
 
     const createHackathon = await Hackathon.create({
-        title,hackathonType,hackathonMode,submissionType,startDate,maxStartDate,endDate,resultDate,prizes, questions, details, companyDetails, instruction
+        title, hackathonType, hackathonMode, submissionType, startDate, maxStartDate, endDate, resultDate, prizes, questions, details, companyDetails, instruction
     });
 
     if (!createHackathon) {
