@@ -4,6 +4,6 @@ const userHackathonController = require('../controllers/userHackathon.controller
 const userHackathonValidator = require('../middlewares/validators/userHackathon.validator')
 const security = require('../middlewares/security/auth.security')
 
-router.post('/submit', security.verifyUser, userHackathonValidator.submitHackathon, userHackathonController.submitHackathon);
+router.post('/submit',  userHackathonValidator.submitHackathon, userHackathonController.submitHackathon);
 
 module.exports = router;
