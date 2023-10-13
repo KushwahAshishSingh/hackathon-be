@@ -3,6 +3,10 @@ const Schema = mongoose.Schema
 
 const HackathonTeamSchema = new Schema({
 
+  hackathonId: {
+    type: mongoose.Types.ObjectId,
+    require: true
+  },
   userId: {
     type: String,
     required: true

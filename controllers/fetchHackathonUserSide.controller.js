@@ -30,7 +30,6 @@ const listHackathonBySearch = async (req, res) => {
         ];
     }
     if (hackathonMode === 'upcoming') {
-        console.log(hackathonMode,'upcoming')
         query['$and'] = [
             {
                 startDate: {
@@ -45,7 +44,6 @@ const listHackathonBySearch = async (req, res) => {
         ];
     }
     if (hackathonMode === 'previous') {
-        console.log(hackathonMode,'previous')
         query['$and'] = [
             {
                 startDate: {

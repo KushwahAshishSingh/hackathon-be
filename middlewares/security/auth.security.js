@@ -3,7 +3,6 @@ const userService = require('../../services/users.services')
 
 const verifyUser = async (req, res, next) => {
     const token = String(req.headers.authorization).split(' ')[1]
-   
     try {
         const firebaseId = await firebase.verifyToken(token)
         const localUser = await userService.searchWithFirebaseUserId(firebaseId.uid)
