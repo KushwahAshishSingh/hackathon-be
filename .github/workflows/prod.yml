@@ -30,6 +30,7 @@ jobs:
         run: |
           aws secretsmanager get-secret-value \
             --secret-id "hackathon-env" \
+            --query "SecretString" \
             --output text > .env
       - run: npm ci
 
