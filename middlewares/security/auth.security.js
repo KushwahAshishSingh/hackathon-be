@@ -6,7 +6,7 @@ const verifyUser = async (req, res, next) => {
     if (!token) {
         const err = new Error()
         err.status = 403
-        err.message = error.message
+        err.message = "unauthorized"
         return next(err)
     }
     try {
