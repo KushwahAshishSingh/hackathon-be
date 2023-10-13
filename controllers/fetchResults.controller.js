@@ -3,7 +3,7 @@ const { httpStatus200, httpStatus404 } = require("../utils/httpResponse");
 const mongoose = require("mongoose");
 
 const fetchResults = async (req, res) => {
-    const {filterInformation, hackathonId } = req.query;
+    const {filterInformation, hackathonId, questionId } = req.query;
 
     const query = {};
     let projection = {};
@@ -33,16 +33,47 @@ const fetchResults = async (req, res) => {
         },
         {
             $unwind: '$Results'
-          },
+        },
           {
             $sort: {
               'Results.updatedAt': -1,
              // 'Results.timeTaken': 1 // Then sort by timeTaken in ascending order
             }
           },
+       
+
         {
-            $project: projection,
+            $project: {
+
+                "Results.userId" : 1,
+                "Results.teamId" : 1,
+                "Results.hackathonId" : 1,
+                "Results.title" : 1,
+                "Results.status" : 1,
+                "Results.questions" : 1,
+
+                question: {
+                    $filter: {
+                        input: '$questions',
+                        as: 'question',
+                        cond: {
+                            $eq: ['$$question._id', new mongoose.Types.ObjectId(questionId)]
+                        }
+                    }
+                },
+
+                answers: {
+                    $filter: {
+                        input: '$Results.submission',
+                        as: 'result',
+                        cond: {
+                            $eq: ['$$result.questionId', new mongoose.Types.ObjectId(questionId)]
+                        }
+                    }
+                }
+            }
         },
+
        
     ]);
 

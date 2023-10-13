@@ -18,6 +18,9 @@ const questionType = {
 }
 
 const question = new mongoose.Schema({
+    roundDetails: {
+        type: "string",
+    },
     question: {
         type: String,
     },
